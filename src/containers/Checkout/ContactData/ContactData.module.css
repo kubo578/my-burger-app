@@ -5,12 +5,6 @@
     box-shadow: 0 2px 3px;
 }
 
-.Input {
-    display: block;
-    margin: 5px;
-    text-align: center;
-}
-
 @media (min-width: 600px) {
     .ContactData {
         width: 500px;
