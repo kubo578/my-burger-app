@@ -4,15 +4,14 @@ import { Route, Redirect } from 'react-router-dom';
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
 import { connect } from 'react-redux';
+
 class Checkout extends Component {
 
     checkoutCancelledHandler = () => {
-        // console.log('checkoutCancellerHandler', this.props)
         this.props.history.goBack();
     }
 
     checkoutContinuedHandler = () => {
-        // console.log('checkoutContinueHandler', this.props)
         this.props.history.replace('/checkout/contact-data')
     }
 
