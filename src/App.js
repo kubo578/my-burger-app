@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import asyncComponent from './hoc/asyncComponent/asyncComponent';
@@ -20,21 +20,22 @@ const asyncAuth = asyncComponent(() => {
   return import('./containers/Auth/Auth')
 });
 
-class  App extends Component {
-  componentDidMount() {
-    this.props.onAuthCheckState();
-  }
+const App = props => {
+  const { onAuthCheckState } = props;
 
-  render ()  {  
+  useEffect(() => {
+    onAuthCheckState();
+  }, [onAuthCheckState]);
+ 
     let routes = (      
       <Switch>
          <Route path="/auth" component={asyncAuth} />
          <Route path="/" exact component={BurgerBuilder} />
          <Redirect to="/"/>
-      </Switch>
+      </Switch> 
     );
      
-    if (this.props.isAuthenticated) {
+    if (props.isAuthenticated) {
       routes = (
         <Switch>
            <Route path="/checkout" component={asyncCheckout} />
@@ -53,7 +54,6 @@ class  App extends Component {
           </Layout>
         </div>
     );
-  }
 }
 
 const mapDispatchToProps = dispatch => {
